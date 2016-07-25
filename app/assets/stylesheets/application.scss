@@ -10,6 +10,49 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+@import "bootstrap";
+@import "font-awesome";
+
+#main-controller{
+	margin-top:3em;
+  font-size:1.5em;
+}
+
+#panel{
+  position:fixed;
+  right:0;
+  top:0;
+  margin-right:0.2em;
+}
+
+.hello{
+  text-align:center;
+  font-size:5em;
+  margin-top:1em;
+}
+
+#problem-statement{
+  font-size:2em;  
+  margin-top:3em;
+  text-align:center;
+}
+
+#answer-list {
+  margin-left:3em;
+  
+  li {
+    font-size: 1.7em;
+    margin-top:0.5em;
+  }
+}
+
+#timer-start {
+  position:fixed;
+  top:80%;
+  left:50%;
+  width:200px;
+  margin-left:-100px;
+  font-size:2em;
+}

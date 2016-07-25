@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="FlexTablePresenter">
   <head>
     <title>FlexTablePresenter</title>
     <%= csrf_meta_tags %>
@@ -9,6 +9,8 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container" ng-view>
+      <%= yield %>
+    </div>
   </body>
 </html>

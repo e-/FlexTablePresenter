@@ -1,0 +1,61 @@
+<div ng-controller="MainController" id="main-controller">
+  <div id="panel" ng-show="info.id">
+    <button class="btn btn-primary">
+      <span class="fa fa-home"></span> (ID: {{ info.id }})
+    </button>
+    <button class="btn btn-default" ng-click="logout()">
+      <span class="fa fa-sign-out"></span> Logout
+    </button>
+  </div>
+  <div ng-show="status === 'welcome'">
+    <h1>FlexTable 실험</h1>
+		<form>
+			<div class="form-group">
+				<label for="ID">ID</label>
+				<input type="text" class="form-control" id="ID" placeholder="ID" ng-model="tempId">
+			</div>
+<!--			<div class="form-group">
+        <label>Type</label>
+        <label class="radio-inline">
+          <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Excel"> Excel
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Tableau"> Tableau
+        </label>
+      </div>-->
+      <button type="submit" class="btn btn-default" ng-click="login()">시작</button>
+		</form>
+  </div>
+  <div ng-show="status === 'summary'">
+    <h1>ID: {{ info.id }}</h1>
+    <div ng-repeat="i in [0, 1]">
+      <h2>{{ info.interfaces[i] }}</h2>
+      <table class="table table-bordered table-hover">
+        <tr ng-repeat="num in info.sequences[0]">
+          <td>{{ $index + 1}}번째 문제</td>
+          <td>{{ num }}번</td>
+          <td>
+            <span ng-if="info.answers[i][$index] > 0">
+              {{ info.times[i][$index] }} 초
+            </span>
+          </td>
+          <td>정답</td>
+          <td>
+            <button class="btn btn-primary" ng-click="problem()">풀기</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div ng-show="status === 'solve'">
+    <button class="btn btn-primary btn-lg" id="timer-start" ng-click="startTimer()" ng-show="beforeTimer">
+      시작
+    </button>
+    <span id="problem-statement" ng-bind-html="problemStatement"></span>
+    <ol id="answer-list">
+      <li ng-repeat="pa in possibleAnswers" ng-click="check()">
+        {{ pa }}
+      </li>
+    </ol>
+  </div>
+</div>
