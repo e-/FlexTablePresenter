@@ -174,7 +174,7 @@ $(function(){
       .error(function(){
         alert('저장 중에 에러가 발생했습니다');
         console.log(arguments);
-      })
+      });
     }
 
     function getUserInfo(id){
@@ -184,7 +184,7 @@ $(function(){
           return JSON.parse(res.data.json);          
         }, function(){
           return {};
-        })
+        });
     }
 
     function login(){
@@ -245,7 +245,7 @@ $(function(){
             $scope.status = 'summary';
           }, function(){
             alert('로그인 실패');
-          })
+          });
       }  
     }
 
@@ -305,8 +305,11 @@ $(function(){
       if($scope.beforeTimer) return;
 
       var endTime = +new Date();
+      var confirmStartTime = +new Date();
 
       if(!confirm('답이 [' + num + '. ' + answer + '] 이(가) 맞습니까?')) {
+        var confirmEndTime = +new Date();
+        $scope.startTime += confirmEndTime - confirmStartTime;
         return;
       }
 
@@ -319,7 +322,7 @@ $(function(){
       saveInfo()
       .success(function(){
         console.log(arguments);
-      })
+      });
 
       $scope.status = 'summary';
     }
