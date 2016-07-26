@@ -29,19 +29,36 @@
   <div ng-show="status === 'summary'">
     <h1>ID: {{ info.id }}</h1>
     <div ng-repeat="i in [0, 1]">
-      <h2>{{ info.interfaces[i] }}</h2>
+      <h2>{{ info.interfaces[i] }} ({{ info.datasets[i] }})</h2>
       <table class="table table-bordered table-hover">
-        <tr ng-repeat="num in info.sequences[0]">
-          <td>{{ $index + 1}}번째 문제</td>
+        <tr>
+          <th>순서</th>
+          <th>문제 번호</th>
+          <th>시간</th>
+          <th>정답</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="num in info.sequences[i]">
+          <td>{{ $index }}번째 문제</td>
           <td>{{ num }}번</td>
           <td>
             <span ng-if="info.answers[i][$index] > 0">
               {{ info.times[i][$index] }} 초
             </span>
+            <span ng-if="info.answers[i][$index] === 0">
+              아직 풀지 않음
+            </span>
           </td>
-          <td>정답</td>
           <td>
-            <button class="btn btn-primary" ng-click="problem()">풀기</button>
+            <span ng-if="info.answers[i][$index] > 0">
+              <span ng-if="info.answers[i][$index] === 6">시간 초과</span>
+              <span ng-if="info.answers[i][$index] <= 5">
+                {{ info.answers[i][$index] }} 번
+              </span>
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-primary" ng-click="showProblem(info.datasets[i], i, num, $index)">풀기</button>
           </td>
         </tr>
       </table>
@@ -53,8 +70,10 @@
     </button>
     <span id="problem-statement" ng-bind-html="problemStatement"></span>
     <ol id="answer-list">
-      <li ng-repeat="pa in possibleAnswers" ng-click="check()">
-        {{ pa }}
+      <li ng-repeat="pa in possibleAnswers">
+        <div ng-click="check($index + 1, pa)">
+          {{ $index + 1 }}. {{ pa }}
+        </div>
       </li>
     </ol>
   </div>
