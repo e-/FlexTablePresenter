@@ -1,4 +1,10 @@
 class ResultsController < ApplicationController
+  def index
+    @pids = (1..16).to_a + (101..116).to_a
+
+    @results = @pids.map { |pid| [pid, Result.order('id desc').find_by(pid: pid)] }
+  end
+
   def create 
     @result = Result.new(params.require(:result).permit(:pid, :json))
     @result.save
