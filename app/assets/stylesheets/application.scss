@@ -37,6 +37,7 @@
   font-size:2em;  
   margin-top:3em;
   text-align:center;
+  word-break: keep-all;;
 }
 
 #answer-list {
@@ -56,4 +57,16 @@
   width:200px;
   margin-left:-100px;
   font-size:2em;
+}
+
+b { //컬럼 제목
+//  font-weight:bold;
+}
+
+i { //aggr 함수
+//text-decoration: italic;
+}
+
+u { // 값 (필터링용)
+
 }

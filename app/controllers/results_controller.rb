@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
   def index
+    @count = Result.count
     @pids = (1..16).to_a + (101..116).to_a
 
     @results = @pids.map { |pid| [pid, Result.order('id desc').find_by(pid: pid)] }
