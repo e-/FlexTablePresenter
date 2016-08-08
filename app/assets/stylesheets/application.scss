@@ -48,15 +48,22 @@
     font-size: 1.7em;
     margin-top:0.5em;
   }
+
+  input[type=radio] {
+    width:1em;
+    height:1em;
+    position:relative;
+    top:0.1em;
+  }
 }
 
-#timer-start {
-  position:fixed;
-  top:80%;
-  left:50%;
-  width:200px;
-  margin-left:-100px;
-  font-size:2em;
+#buttons {
+  text-align:center;
+
+  button{
+    font-size:3em;
+    margin: 1em;
+  }
 }
 
 b { //컬럼 제목

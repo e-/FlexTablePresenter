@@ -301,17 +301,21 @@ $(function(){
       }, limit * 1000);
     }
 
-    function check(num, answer) {
+    function checkAnswer(num, desc) {
+      $scope.answerNum = num;
+      $scope.answerDesc = desc;
+      $scope.answerTime = +new Date();
+      console.log('answer marked', num, desc);
+    }
+
+    function answered() {
       if($scope.beforeTimer) return;
+      if(!$scope.answerNum) return;
 
-      var endTime = +new Date();
-      var confirmStartTime = +new Date();
-
-      if(!confirm('답이 [' + num + '. ' + answer + '] 이(가) 맞습니까?')) {
-        var confirmEndTime = +new Date();
-        $scope.startTime += confirmEndTime - confirmStartTime;
-        return;
-      }
+      var num = $scope.answerNum;
+      $scope.answerNum = null;
+      var desc = $scope.answerDesc;
+      var endTime = $scope.answerTime;
 
       var datasetIndex = $scope.datasetIndex;
       var problemIndex = $scope.problemIndex;
@@ -319,6 +323,7 @@ $(function(){
       $scope.info.times[datasetIndex][problemIndex] = (endTime - $scope.startTime) / 1000;
       $scope.info.answers[datasetIndex][problemIndex] = num;
      
+      console.log('answered', (endTime - $scope.startTime) / 1000);
       saveInfo()
       .success(function(){
         console.log(arguments);
@@ -339,7 +344,8 @@ $(function(){
     $scope.logout = logout;
     $scope.showProblem = showProblem;
     $scope.startTimer = startTimer;
-    $scope.check = check;
+    $scope.checkAnswer = checkAnswer;
+    $scope.answered = answered;
     $scope.home = home;
   });
 });
