@@ -39,66 +39,14 @@
       <table class="table table-bordered table-hover">
         <tr>
           <td ng-repeat="num in info.sequences[i]">
-            <button class="btn" ng-class="{'btn-primary': info.answers[i][$index] === 0, 'btn-default': info.answers[i][$index] > 0}"ng-click="showProblem(i, num, $index)">풀기</button>
+            <button class="btn" ng-class="{'btn-primary': info.answers[i][$index] === 0, 'btn-default': info.answers[i][$index] > 0}" ng-disabled="num == 0 && i == 0" ng-click="showProblem(i, num, $index)">풀기</button>
           </td>
         </tr>
-
-        <!--
-          <td>
-            <span ng-if="info.answers[i][$index] > 0">
-              {{ info.times[i][$index] }} 초
-            </span>
-            <span ng-if="info.answers[i][$index] === 0">
-              아직 풀지 않음
-            </span>
-          </td>
-          <td>
-            <span ng-if="info.answers[i][$index] > 0">
-              <span ng-if="info.answers[i][$index] === 6">시간 초과</span>
-              <span ng-if="info.answers[i][$index] <= 5">
-                {{ info.answers[i][$index] }} 번
-              </span>
-            </span>
-          </td>
-          <td>
-          </td>
- 
-
-          <th>순서</th>
-          <th>문제 번호</th>
-          <th>시간</th>
-          <th>정답</th>
-          <th></th>
-        </tr>
-        <tr ng-repeat="num in info.sequences[i]">
-          <td>{{ $index }}번째 문제</td>
-          <td>{{ num }}번</td>
-          <td>
-            <span ng-if="info.answers[i][$index] > 0">
-              {{ info.times[i][$index] }} 초
-            </span>
-            <span ng-if="info.answers[i][$index] === 0">
-              아직 풀지 않음
-            </span>
-          </td>
-          <td>
-            <span ng-if="info.answers[i][$index] > 0">
-              <span ng-if="info.answers[i][$index] === 6">시간 초과</span>
-              <span ng-if="info.answers[i][$index] <= 5">
-                {{ info.answers[i][$index] }} 번
-              </span>
-            </span>
-          </td>
-          <td>
-            <button class="btn btn-primary" ng-click="showProblem(info.datasets[i], i, num, $index)">풀기</button>
-          </td>
-        </tr>
-        -->
       </table>
     </div>
   </div>
   <div ng-if="status === 'solve'">
-    <span id="problem-statement" ng-bind-html="problemStatement"></span>
+    <span id="problem-statement"><span ng-bind-html="problemStatement"></span> <span ng-bind-html="problemExtra"></span></span>
     <ol id="answer-list">
       <li ng-repeat="pa in possibleAnswers">
         <div class="radio">

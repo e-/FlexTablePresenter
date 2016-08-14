@@ -18,6 +18,3 @@
 //= require_tree .
 //= require angular
 //= require angular-sanitize
-//= require const
-//= require main
-

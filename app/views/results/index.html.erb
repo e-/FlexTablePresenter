@@ -1,30 +1,63 @@
+<script>
+  var results = <%= raw (@results.map do |r| r[1].nil? ? [r[0], nil]: [r[0], r[1].parsed] end).to_json %>;
+</script>
+
+<div ng-controller="ResultsController">
 <p>
   <%= @count %>개의 기록이 있습니다.
 </p>
-<table class="table table-bordered table-hover table-striped">
+<table class="table table-bordered table-sm">
+  <tr>
+    <th>FlexTable-Easy</th>
+    <th>FlexTable-Hard</th>
+    <th>Excel-Easy</th>
+    <th>Excel-Hard</th>
+    <th>Tableau-Easy</th>
+    <th>Tableau-Hard</th>
+  </tr>
+  <tr>
+    <td>
+      {{ stat.timeSum.FlexTable[0] / stat.correct.FlexTable[0] | number:2 }}s,&nbsp; 
+      {{ stat.correct.FlexTable[0] / stat.trial.FlexTable[0] * 100 | number:2}}%
+    </td>
+    <td>
+      {{ stat.timeSum.FlexTable[1] / stat.correct.FlexTable[1] | number:2 }}s,&nbsp; 
+      {{ stat.correct.FlexTable[1] / stat.trial.FlexTable[1] * 100 | number:2}}
+    </td>
+    <td>
+      {{ stat.timeSum.Excel[0] / stat.correct.Excel[0] | number:2 }}s,&nbsp; 
+      {{ stat.correct.Excel[0] / stat.trial.Excel[0] * 100 | number:2}}%
+    </td>
+    <td>
+      {{ stat.timeSum.Excel[1] / stat.correct.Excel[1] | number:2 }}s,&nbsp; 
+      {{ stat.correct.Excel[1] / stat.trial.Excel[1] * 100 | number:2}}%
+    </td>
+    <td>
+      {{ stat.timeSum.Tableau[0] / stat.correct.Tableau[0] | number:2 }}s,&nbsp; 
+      {{ stat.correct.Tableau[0] / stat.trial.Tableau[0] * 100 | number:2}}%
+    </td>
+    <td>
+      {{ stat.timeSum.Tableau[1] / stat.correct.Tableau[1] | number:2 }}s,&nbsp; 
+      {{ stat.correct.Tableau[1] / stat.trial.Tableau[1] * 100 | number:2}}%
+    </td>
+  </tr>
+</table>
+<table class="table table-bordered table-sm">
   <tr>
     <th>ID</th>
-    <th>인터페이스</th>
+    <th colspan="7">결과</th>
   </tr>
-<% @results.each do |(pid, result)| %>
-  <tr>
-    <td rowspan="<%= if result.nil? then 1 else 2 end %>"><%= pid %></td>
-  <% if result.nil? then %>
-    <td colspan="10">실험 진행 전</td>
-  <% else %>
-    <td><%= result.parsed["interfaces"][0] %>, <%= result.parsed["datasets"][0] %></td>
-    <% result.parsed["sequences"][0].each_with_index do |pn, i| %>
-      <td><%= pn %> <br />(<%= result.parsed["times"][0][i] %>초)</td>
-    <% end %>
-  <% end %>
-  <% if !result.nil? then %>
-  <tr>
-    <td><%= result.parsed["interfaces"][1] %>, <%= result.parsed["datasets"][1] %></td>
-    <% result.parsed["sequences"][1].each_with_index do |pn, i| %>
-      <td><%= pn %> <br />(<%= result.parsed["times"][1][i] %>초)</td>
-    <% end %>
+  <tr ng-repeat-start="result in results">
+    <td rowspan="3">{{ result[0] }}</td>
+    <td colspan="7">{{ result[1].interface }}</td>
   </tr>
-  <% end%>
-</tr>
-<% end -%>
+  <tr ng-repeat-end ng-repeat="t in [0, 1]">
+    <td ng-repeat="pn in result[1].sequences[t]" ng-class="{'bg-success': result[1].answers[t][$index] == getProblem(t, pn).correctAnswer,
+            'bg-warning': result[1].answers[t][$index] != 0 && result[1].answers[t][$index] != getProblem(t, pn).correctAnswer, 
+            'bg-danger': result[1].answers[t][$index] == 7
+            }">
+            {{ pn }}번 ({{result[1].answers[t][$index]}}, {{result[1].times[t][$index]}} 초)
+    </td>
+  </tr>
 </table>
+</div>

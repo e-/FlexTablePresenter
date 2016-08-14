@@ -104,11 +104,12 @@ $(function(){
         }
       });
 
-    function showProblem(dataset, datasetIndex, num, problemIndex){
+    function showProblem(datasetIndex, num, problemIndex){
       $scope.status = 'solve';
-      var problem = getProblem(dataset, num);
-      console.log(dataset, num, 'started', problem);
+      var problem = getProblem(datasetIndex, num);
+      console.log(datasetIndex, num, 'started', problem);
       $scope.problemStatement = problem.html;
+      $scope.problemExtra = problem[$scope.info.interface] || '';
       $scope.possibleAnswers = problem.possibleAnswers;
       $scope.beforeTimer = true;
       $scope.datasetIndex = datasetIndex;
@@ -132,7 +133,11 @@ $(function(){
           var problemIndex = $scope.problemIndex;
 
           $scope.info.times[datasetIndex][problemIndex] = limit;
-          $scope.info.answers[datasetIndex][problemIndex] = 6;
+          $scope.info.answers[datasetIndex][problemIndex] = 7;
+          saveInfo()
+          .success(function(){
+            console.log(arguments);
+          });
 
           alert(limit + '초 시간 종료!');
           $scope.status = 'summary';
@@ -149,6 +154,10 @@ $(function(){
 
     function answered() {
       if($scope.beforeTimer) return;
+      if($scope.possibleAnswers.length === 0) {
+        $scope.answerNum = 6;
+        $scope.answerTime = +new Date();
+      }
       if(!$scope.answerNum) return;
 
       var num = $scope.answerNum;
