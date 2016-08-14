@@ -77,3 +77,25 @@ i { //aggr 함수
 u { // 값 (필터링용)
 
 }
+
+.tutorial {
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:white;
+  padding:30px;
+  
+  li {
+    font-size:1.2em;
+    word-break: keep-all;;
+    margin-top:25px;
+  }
+}
+
+.subtle {
+  //color: #373a3c;
+
+}
+

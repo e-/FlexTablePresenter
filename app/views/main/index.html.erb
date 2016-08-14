@@ -18,11 +18,52 @@
 		</form>
   </div>
   <div ng-show="status === 'summary'">
-    <h1>ID: {{ info.id }}</h1>
+    <h1>{{ info.interface  }} <small>(ID: {{ info.id }})</small></h1>
+
+    <h2>튜토리얼</h2>
+    <table class="table table-bordered">
+      <tr>
+        <td><iframe width="240" height="100" ng-src="{{videoUrls[0]}}" frameborder="0" allowfullscreen></iframe></td>
+        <td><iframe width="240" height="100" ng-src="{{videoUrls[1]}}" frameborder="0" allowfullscreen></iframe></td>
+        <td><iframe width="240" height="100" ng-src="{{videoUrls[2]}}" frameborder="0" allowfullscreen></iframe></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><button class="btn btn-default" ng-click="tutorial1 = true">튜토리얼 1</button></td>
+        <td><button class="btn btn-default" ng-click="tutorial2 = true">튜토리얼 2</button></td>
+      </tr>
+    </table>
+
     <div ng-repeat="i in [0, 1]">
-      <h2>{{ info.interfaces[i] }} ({{ info.datasets[i] }})</h2>
+      <h2>{{ ['연습', '태스크 1'][i] }}</h2>
       <table class="table table-bordered table-hover">
         <tr>
+          <td ng-repeat="num in info.sequences[i]">
+            <button class="btn" ng-class="{'btn-primary': info.answers[i][$index] === 0, 'btn-default': info.answers[i][$index] > 0}"ng-click="showProblem(i, num, $index)">풀기</button>
+          </td>
+        </tr>
+
+        <!--
+          <td>
+            <span ng-if="info.answers[i][$index] > 0">
+              {{ info.times[i][$index] }} 초
+            </span>
+            <span ng-if="info.answers[i][$index] === 0">
+              아직 풀지 않음
+            </span>
+          </td>
+          <td>
+            <span ng-if="info.answers[i][$index] > 0">
+              <span ng-if="info.answers[i][$index] === 6">시간 초과</span>
+              <span ng-if="info.answers[i][$index] <= 5">
+                {{ info.answers[i][$index] }} 번
+              </span>
+            </span>
+          </td>
+          <td>
+          </td>
+ 
+
           <th>순서</th>
           <th>문제 번호</th>
           <th>시간</th>
@@ -52,6 +93,7 @@
             <button class="btn btn-primary" ng-click="showProblem(info.datasets[i], i, num, $index)">풀기</button>
           </td>
         </tr>
+        -->
       </table>
     </div>
   </div>
@@ -78,4 +120,116 @@ click="answered()" ng-class="{'btn-primary': !beforeTimer, 'btn-default': before
       </button>
     </div>
   </div>
+
+  <div class="tutorial" ng-show="tutorial1">
+    <h1>{{ info.interface }} Tutorial - Part 1</h1>
+    <ol ng-if="info.interface === 'FlexTable'">
+      <li><b>윤리 등급</b>의 빈도를 확인하기 위해 왼손 및 부채꼴 모양의 위젯을 이용하여 <b>윤리 등급</b> 열을 선택해 보세요.</li>
+
+      <li><b>윤리 등급</b>에 따른 <b>지리 점수</b>의 <i>합계</i>를 확인하기 위해 <b>지리 점수</b> 열을 테이블을 스크롤 하여 찾고 열 이름을 탭하여 선택해 보세요.</li>
+
+      <li><b>지리 점수</b>의 <i>합계</i> 대신 <i>평균</i>을 구하도록 변경해 보세요.</li>
+
+      <li>피벗 차트의 제목에서 <b>윤리 등급</b> 열을 탭 하여 <b>언어 등급</b> 열로 바꾸어 보세요.</li>
+
+      <li><b>언어 등급</b>이 <u>3등급</u>에 해당하는 막대를 탭하여 값을 읽고 다시 한번 탭하여 선택을 해제 해 보세요.</li>
+
+      <li>세로 막대형 차트 대신 <i>꺾은선 형 차트</i>를 확인해 보세요.</li>
+
+      <li>차트를 두 번 아래로 끌어 모든 피벗 변환을 취소해 보세요.</li>
+    </ol>
+    <ol ng-if="info.interface === 'Excel'">
+      <li><b>윤리 등급</b> 필드를 선택하여 행 리스트에 오도록 해보세요.</li>
+
+      <li><b>지리 점수</b> 필드를 선택하여 값 리스트에 오도록 해보세요.</li>
+
+      <li>값 리스트의 <b>지리 점수</b> 필드를 클릭하고 “값 필드 설정” 대화 상자를 연 후 합계 대신 <u>평균</u>을 구하도록 해보세요.</li>
+
+      <li>마우스 커서를 <b>윤리 등급</b>이 <u>3등급</u>인 막대로 가져가 값을 읽어 보세요.</li>
+
+      <li><b>윤리 등급</b> 및 <b>지리 점수</b> 필드를 행 및 값 리스트에서 제거하세요.</li>
+
+      <li><b>출신지역</b> 필드를 행 리스트와 값 리스트로 옮겨 <b>출신지역</b> 별 학생들의 수를 볼 수 있는 빈도수 히스토그램을 그려 보세요.</li>
+
+      <li>빈도수 히스토그램을 <i>꺾은선 형 차트</i>로 바꾸어 보세요.</li>
+    </ol>
+    <ol ng-if="info.interface === 'Tableau'">
+      <li><b>윤리 등급</b> 열을 차원 리스트에서 끌어 열 리스트로 옮겨 보세요.</li>
+
+      <li><b>지리 점수</b> 열을 측정값 리스트에서 끌어 행 리스트로 옮겨 보세요.</li>
+
+      <li>행 리스트의 <b>합계(지리 점수)</b>를 마우스 오른쪽 클릭한 후 <i>측정값 (합계)</i>를 선택하고 <i>평균</i>으로 바꾸어 보세요.</li>
+
+      <li>마우스를 <b>윤리 등급</b>이 <u>3등급</u>인 막대로 가져가 값을 읽어 보세요.</li>
+
+      <li>열 및 행 리스트로 이동시킨 열들을 모두 제거하세요.</li>
+
+      <li>이제 <b>출신 지역</b>별 학생들의 빈도수를 구해 봅시다. <b>출신 지역</b> 열을 열 리스트와 행 리스트로 옮깁시다.</li>
+
+      <li>행 리스트의 <b>출신 지역</b> 열을 마우스 오른쪽 클릭하여 측정값 &gt; 카운트를 선택하세요.</li>
+       
+      <li>피벗 차트를 꺾은선 형으로 바꾸기 위해 마크 영역에서 <i>자동</i> 마크를 <i>라인</i> 마크로 바꾸어 보세요.</li>
+    </ol>
+
+    <button class="btn btn-primary btn-lg" ng-click="tutorial1 = false">완료</button>
+  </div>
+
+  <div class="tutorial" ng-show="tutorial2">
+    <h1>{{ info.interface }} Tutorial - Part 2</h1>
+    <ol ng-if="info.interface === 'FlexTable'">
+      <li><b>영어 등급</b> 열과 <b>수리 점수</b> 열을 선택하고 <i>합계</i>를 <i>평균</i>으로 바꾸어 <b>영어 등급</b>에 따른 <b>수리 점수</b>의 <i>평균</i>을 확인할 수 있는 세로 막대형 차트를 만들어 보세요.</li>
+
+      <li><b>성별</b> 열을 추가로 선택하여 묶은 막대형 차트를 만들어 보세요.</li>
+
+      <li>묶은 막대형 차트를 <i>꺾은선 형 차트</i>로 바꾸어 보세요.</li>
+
+      <li>펜을 이용하여 테이블상에서 <b>영어 등급</b>이 <u>1등급</u>인 학생들을 제외해 보세요.</li>
+
+      <li>펜을 이용하여 차트상에서 <b>영어 등급</b>이 <u>2등급</u>인 학생들을 제외해 보세요.</li>
+
+      <li>화면 오른쪽의 필터뷰에서 <b>출신지역</b>이 <u>서울</u>인 학생들을 제외해 보세요.</li>
+
+      <li>필터 뷰의 “모두 선택” 버튼을 이용하여 제외된 학생들을 되돌려 보세요.</li>
+
+      <li>화면 왼쪽 위의 집 모양 버튼을 눌러 처음으로 돌아가 보세요.</li>
+    </ol>
+    <ol ng-if="info.interface === 'Excel'">
+      <li><b>영어 등급</b> 필드와 <b>수리 점수</b> 필드를 선택하여 <b>영어 등급</b>에 따른 <b>수리 점수</b>의 <i>합계</i>를 확인할 수 있는 세로 막대형 차트를 만들어 보세요.</li>
+      
+      <li><b>성별</b> 필드를 행 리스트에 추가하여 <b>영어 등급</b> 및 <b>성별</b>에 피벗 변환을 적용해 보세요.</li>
+
+      <li><b>성별</b>필드를 열 리스트로 옮겨 묶은 막대형 차트를 만들어 보세요.</li>
+
+      <li>값 리스트에서 <b>수리 점수</b>의 <i>합계</i> 대신 <i>평균</i>을 구하도록 변경하세요.</li>
+
+      <li>묶은 막대형 차트를 <i>꺾은선 형 차트</i>로 바꿔 보세요.</li>
+
+      <li>필터 기능을 이용하여 <b>영어 등급</b>이 <u>1등급</u> 혹은 <u>2등급</u> 인 학생들을 제외해 보세요.</li>
+
+      <li><b>출신지역</b> 필드를 필터 리스트로 옮긴 후 차트 왼쪽 위에 생기는 필터를 이용하여 <u>서울</u> 출신 학생들을 제외해 보세요.</li>
+    </ol>
+ 
+    <ol ng-if="info.interface === 'Tableau'">
+      <li><b>영어 등급</b> 열을 열 리스트로, <b>수리 점수</b> 열을 행 리스트로 옮겨 <b>영어 등급</b>에 따른 <b>수리 점수</b>의 <i>합계</i>를 확인할 수 있는 세로 막대형 차트를 만들어 보세요.</li>
+
+      <li><b>성별</b> 열을 열 리스트로 끌어 <b>영어 등급</b> 및 <b>성별</b>에 피벗 변환을 적용해 보세요.</li>
+
+      <li><b>성별</b> 열을 다시 한번 마크 영역의 색상 리스트로 끌어 색깔로 성별을 구분할 수 있는 묶은 막대형 차트를 만들어 보세요.</li>
+
+      <li>행 리스트에서 <i>합계(수리점수)</i>를 마우스 오른쪽 클릭하여 <u>합계</u> 대신 <i>평균</i>을 구하도록 변경하세요.</li>
+
+      <li>이제 꺾은선 형 차트로 바꾸어 봅시다. 마크 영역에서 <i>자동</i> 마크를 <i>라인</i> 마크로 바꿔보세요. </li>
+
+      <li>그 다음, 열 리스트에서 <b>성별</b> 열을 제거해 <b>영어 등급</b>과 <b>성별</b>에 따른 <b>수리 점수</b>의 <i>평균</i>을 보여주는 <i>꺾은선 형 차트</i>를 그려 보세요.</li>
+
+      <li><b>출신지역</b> 열을 필터 리스트로 옮겨보세요. 필터 대화 상자에서 <u>서울</u> 앞에 있는 체크표시를 누른 후 “확인” 버튼을 눌러 <i>서울</i> 출신 학생들만 제외해 보세요.</li>
+
+      <li>위에서 만든 필터를 마우스로 필터 리스트 밖으로 끌어 제거해 보세요.</li>
+    </ol>
+ 
+    <button class="btn btn-primary btn-lg" ng-click="tutorial2 = false">완료</button>
+  </div>
 </div>
+
+<!-- [0, 3, 2, 1, 4, 5, 6] 이라는 시퀀스가 있으면 문제 번호를 뜻함. 답을 저장할 때에는 문제 번호가 아니라 몇 번째 문제에 대합 답인지를 저장함. 따라서 i번째 문제는 seq[i]이고 답은 answers[i]가 됨. 이는 2중 lookup을 (answers[seq[i]]) 막기 위함임-->
+
