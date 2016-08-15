@@ -15,15 +15,15 @@ function createNewSequence(){
 
 
 function getTimeLimit(number) {
-  if(number <= 3) return 5; // in seconds
-  return 5; // in seconds
+  if(number <= 3) return 60; // in seconds
+  return 90; // in seconds
 }
 
 
 function getVideoUrl(inter, $sce) {
   var videos = {
     'FlexTable': [
-      'https://www.youtube.com/embed/dLgRdBS2K_g?vq=hd1080',
+      'https://www.youtube.com/embed/s5trtkW6Kjg?vq=hd1080',
       'https://www.youtube.com/embed/NnmzKgvmwhE?vq=hd1080'
     ],
     'Excel': [

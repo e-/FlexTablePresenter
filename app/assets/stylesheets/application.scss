@@ -99,3 +99,14 @@ u { // 값 (필터링용)
 
 }
 
+.container {
+  padding-left:0;
+  padding-right:0;
+  margin: 0px 40px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: none;
+  }
+}
