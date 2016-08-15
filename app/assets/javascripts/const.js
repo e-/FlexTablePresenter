@@ -172,9 +172,9 @@ function getProblem(phase, number){
           correctAnswer: 1
         },
         6: {
-          html: '<b>시대</b>에 따른 <b>등급</b>별 <b>IMDB 평점</b>의 <i>평균</i>의 변화를 비교하려고 한다. 이를 볼 수 있는 <i>꺾은선 형 차트</i>를 만드세요.',
-          Tableau: '(선을 <b>성별</b>에 따라서 색으로 구분하세요.)',
-          Excel: '(선을 <b>성별</b>에 따라서 색으로 구분하세요.)',
+          html: '<b>등급</b>에 따른 <b>시대</b>별 <b>IMDB 평점</b>의 <i>평균</i>의 변화를 비교하려고 한다. 이를 볼 수 있는 <i>꺾은선 형 차트</i>를 만드세요.',
+          Tableau: '(선을 <b>시대</b>에 따라서 색으로 구분하세요.)',
+          Excel: '(선을 <b>시대</b>에 따라서 색으로 구분하세요.)',
           possibleAnswers: [],
           correctAnswer: 6
         }
