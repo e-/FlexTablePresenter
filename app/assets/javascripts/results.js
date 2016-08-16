@@ -28,6 +28,7 @@ $(function(){
 
     results.forEach(function(result) {
       if(result[1] == null) return;
+      if(result[0] > 60) return;
       result = result[1];
       for(var i=1;i<=6;++i) {
         var pnum = result.sequences[1][i];

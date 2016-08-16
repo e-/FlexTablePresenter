@@ -24,14 +24,14 @@ function getVideoUrl(inter, $sce) {
   var videos = {
     'FlexTable': [
       'https://www.youtube.com/embed/s5trtkW6Kjg?vq=hd1080',
-      'https://www.youtube.com/embed/NnmzKgvmwhE?vq=hd1080'
+      'https://www.youtube.com/embed/06tI2jbCHwg?vq=hd1080'
     ],
     'Excel': [
       'https://www.youtube.com/embed/qGMvR3dlR4c?vq=hd1080',
       'https://www.youtube.com/embed/IqSNitHMxeY?vq=hd1080'
     ],
     'Tableau': [
-      'https://www.youtube.com/embed/DmNC6BZOWaw?vq=hd1080',
+      'https://www.youtube.com/embed/O1OA8MNbEz8?vq=hd1080',
       'https://www.youtube.com/embed/BajF4_4v86U?vq=hd1080'
     ]
   };
@@ -106,6 +106,7 @@ function getProblem(phase, number){
           html: '<b>수리등급</b>과 <b>성별</b>에 따른 <b>지리점수</b>의 <i>평균</i>의 변화를 비교하려고 한다. 이를 볼 수 있는 <i>꺾은선 형 차트</i>를 만드세요.',
           Tableau: '(선을 <b>성별</b>에 따라서 색으로 구분하세요.)',
           Excel: '(선을 <b>성별</b>에 따라서 색으로 구분하세요.)',
+          FlexTable: '(선을 <b>성별</b>에 따라서 색으로 구분하세요.)',
           possibleAnswers: [],
           correctAnswer: 6
         }
@@ -156,7 +157,7 @@ function getProblem(phase, number){
             '아동소설',
             '역사소설',
             '판타지',
-            '현대소설'
+            '각색'
           ],
           correctAnswer: 2
         },
@@ -172,9 +173,7 @@ function getProblem(phase, number){
           correctAnswer: 1
         },
         6: {
-          html: '<b>등급</b>에 따른 <b>시대</b>별 <b>IMDB 평점</b>의 <i>평균</i>의 변화를 비교하려고 한다. 이를 볼 수 있는 <i>꺾은선 형 차트</i>를 만드세요.',
-          Tableau: '(선을 <b>시대</b>에 따라서 색으로 구분하세요.)',
-          Excel: '(선을 <b>시대</b>에 따라서 색으로 구분하세요.)',
+          html: '<b>시대</b>에 따른 <b>등급</b>별 <b>IMDB 평점</b>의 <i>평균</i>의 변화를 비교하려고 한다. 이를 볼 수 있는 <i>꺾은선 형 차트</i>를 만드세요. (선을 <b>등급</b>에 따라서 색으로 구분하세요.)',
           possibleAnswers: [],
           correctAnswer: 6
         }
